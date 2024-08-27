@@ -1,9 +1,9 @@
 <script>
-  export default {
-    props: {
-      honeydews: Array,
-    },
-  };
+export default {
+  props: {
+    honeydews: Array,
+  },
+};
 </script>
 
 <template>
@@ -11,6 +11,7 @@
     <h1>All Honeydews</h1>
     <div v-for="honeydew in honeydews" v-bind:key="honeydew.id">
       <h2>{{ honeydew.name }}</h2>
+      <p>{{ honeydew.description }}</p>
     </div>
   </div>
 </template>

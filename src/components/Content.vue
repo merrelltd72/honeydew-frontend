@@ -1,19 +1,28 @@
 <script>
-  import HoneydewsIndex from '../HoneydewsIndex.vue';
+import axios from "axios";
+import HoneydewsIndex from "../HoneydewsIndex.vue";
 
-  export default {
-    components: {
-      HoneydewsIndex,
+export default {
+  components: {
+    HoneydewsIndex,
+  },
+  data: function () {
+    return {
+      honeydews: [],
+    };
+  },
+  created: function () {
+    this.handleIndexHoneydews();
+  },
+  methods: {
+    handleIndexHoneydews: function () {
+      axios.get("http://localhost:5000/honeydews.json").then((response) => {
+        console.log("honeydews index", response);
+        this.honeydews = response.data;
+      });
     },
-    data: function () {
-      return {
-        honeydews: [
-          { id: 1, name: "test1"},
-          { id: 2, name: "test2"},
-        ],
-      };
-    },
-  };
+  },
+};
 </script>
 
 <template>
