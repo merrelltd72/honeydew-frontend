@@ -12,6 +12,7 @@ export default {
     <div v-for="honeydew in honeydews" v-bind:key="honeydew.id">
       <h2>{{ honeydew.name }}</h2>
       <p>{{ honeydew.description }}</p>
+      <button v-on:click="$emit('showHoneydew', honeydew)">More info</button>
     </div>
   </div>
 </template>
