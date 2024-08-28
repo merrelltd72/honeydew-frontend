@@ -2,15 +2,21 @@
 import axios from "axios";
 import HoneydewsIndex from "../HoneydewsIndex.vue";
 import HoneydewNew from "../HoneydewNew.vue";
+import HoneydewsShow from "./HoneydewsShow.vue";
+import Modal from "./Modal.vue";
 
 export default {
   components: {
     HoneydewsIndex,
     HoneydewNew,
+    HoneydewsShow,
+    Modal,
   },
   data: function () {
     return {
       honeydews: [],
+      currentHoneydew: {},
+      isHoneydewsShowVisible: false,
     };
   },
   created: function () {
@@ -34,6 +40,14 @@ export default {
           console.log("photos create error", error.response);
         });
     },
+    handleShowHoneydew: function (honeydew) {
+      console.log("handleShowHoneydew", honeydew);
+      this.currentHoneydew = honeydew;
+      this.isHoneydewsShowVisible = true;
+    },
+    handleClose: function () {
+      this.isHoneydewsShowVisible = false;
+    },
   },
 };
 </script>
@@ -41,7 +55,10 @@ export default {
 <template>
   <main>
     <HoneydewNew v-on:createHoneydew="handleCreateHoneydew" />
-    <HoneydewsIndex v-bind:honeydews="honeydews" />
+    <HoneydewsIndex v-bind:honeydews="honeydews" v-on:showHoneydew="handleShowHoneydew" />
+    <Modal v-bind:show="isHoneydewsShowVisible" v-on:close="handleClose">
+      <HoneydewsShow v-bind:honeydew="currentHoneydew" />
+    </Modal>
   </main>
 </template>
 
